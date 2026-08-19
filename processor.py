@@ -7,7 +7,12 @@ def total_tally(data):
 
     return medal_tally
 
-def year_country(data):
+def year_country(data, season):
+    if season == 'Summer':
+        data = data[data['Season'] == 'Summer']
+    else:
+        data = data[data['Season'] == 'Winter']
+
     year = sorted(data['Year'].unique().tolist(), reverse=True)
     year.insert(0, 'Overall')
     country = sorted(data['Region'].unique().tolist())

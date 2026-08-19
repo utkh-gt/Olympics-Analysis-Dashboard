@@ -19,11 +19,11 @@ ana_type = st.sidebar.radio('Select the analysis type :-', ['Medal Total Tally',
 if ana_type == 'Medal Total Tally':
     st.sidebar.subheader('Medal Tally')
 
-    year, country = processor.year_country(data)
+    user_season = st.sidebar.radio('Select Season :-', ['Summer', 'Winter'])
 
+    year, country = processor.year_country(data, user_season)
     user_year = st.sidebar.selectbox("Select Year :-", year)
     user_country = st.sidebar.selectbox("Select Country :-", country)
-    user_season = st.sidebar.radio('Select Season :-', ['Summer', 'Winter'])
 
     if (user_country == 'All') and (user_year == 'Overall'):
         st.title(f'Overall Medal Tally of All the Countries in {user_season} Olympics')
@@ -91,7 +91,7 @@ elif ana_type == 'Country Wise Analysis':
     st.sidebar.header('Country Wise Analysis of Olympics')
     country = sorted(data['Region'].unique().tolist())
     user_country = st.sidebar.selectbox('Select Country :', country)
-    user_season = st.sidebar.radio('Select Season :', ['Summer', 'Winter', 'Both'])
+    user_season = st.sidebar.selectbox('Select Season :', ['Summer', 'Winter', 'Both'])
 
     medal_graph, medal_table = processor.medals_graph_table(data, user_season, user_country)
 
